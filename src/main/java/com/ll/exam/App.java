@@ -32,7 +32,7 @@ public class App {
                 case "등록":
                     add(idx);
                     idx++;
-
+                    break;
             }
         }
         sc.close();
