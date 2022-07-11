@@ -3,14 +3,17 @@ package com.ll.exam;
 import java.util.Scanner;
 
 public class App {
+    Post post;
 
     public void add(int idx){
         Scanner sc1 = new Scanner(System.in);
 
         System.out.printf("명언 : ");
-        sc1.nextLine();
+        String contents = sc1.nextLine();
         System.out.printf("작가 : ");
-        sc1.nextLine();
+        String author = sc1.nextLine();
+
+        post = new Post(idx, contents, author);
 
         System.out.println(idx+"번 글이 등록되었습니다.");
     }
