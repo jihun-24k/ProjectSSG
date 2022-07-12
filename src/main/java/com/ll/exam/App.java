@@ -24,6 +24,8 @@ public class App {
         return post;
     }
 
+
+
     public void run() {
         System.out.println("-- 명언 SSG --");
         Scanner sc = new Scanner(System.in);
@@ -34,8 +36,9 @@ public class App {
             System.out.printf("명령) ");
             // trim()은 띄어쓰기를 삭제
             String cmd = sc.nextLine().trim();
+            Rq rq = new Rq(cmd);
 
-            switch (cmd){
+            switch (rq.getPath()){
                 case "종료":
                     break outer;
                 case "등록":
@@ -48,6 +51,26 @@ public class App {
                     for (int i = posts.size() - 1; i >= 0; i--){
                         Post post1 = posts.get(i);
                         System.out.printf("%d/%3s/%3s\n", post1.idx, post1.author, post1.contents);
+                    }
+                    break;
+                case "삭제":
+                    int delId = rq.getIntParam("id",0);
+                    Post postNull = null;
+                    if (delId == 0){
+                        System.out.println("id 값을 입력해주세요.");
+                        continue ;
+                    }
+                    for (int i = posts.size() - 1; i >= 0; i--){
+                        Post delPost = posts.get(i);
+                        if (delPost.idx == delId){
+                            System.out.println(delPost.idx+"번 명언이 삭제되었습니다.");
+                            posts.remove(i);
+                            postNull = delPost;
+                            break ;
+                        }
+                    }
+                    if (postNull == null){
+                        System.out.println(delId+"번 명언은 없습니다.");
                     }
                     break;
             }
