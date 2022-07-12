@@ -22,4 +22,9 @@ public class Rq {
         }
         return DefaultValue;
     }
+
+    public String getPath(){
+        String path = url.split("\\?",2)[0];
+        return path;
+    }
 }

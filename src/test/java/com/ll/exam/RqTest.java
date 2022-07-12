@@ -24,4 +24,10 @@ public class RqTest {
         assertEquals(1, no);
     }
 
+    @Test
+    public void getPathTest(){
+        Rq rq = new Rq("삭제?id=1");
+        String path = rq.getPath();
+        assertEquals("삭제",path);
+    }
 }
