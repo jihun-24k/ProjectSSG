@@ -2,16 +2,21 @@ package com.ll.exam;
 
 public class Rq {
     String url;
+    String path;
+    String queryStr;
 
     Rq(String url){
         this.url = url;
+        String[] urlBits = url.split("\\?", 2);
+        this.path = urlBits[0];
+        if (urlBits[1].length() > 2){
+            this.queryStr = urlBits[1];
+        }
     }
 
     public int getIntParam(String _queryParam, int DefaultValue){
-        String[] urlBits = url.split("\\?", 2);
-        urlBits = urlBits[1].split("&");
-
-        for (String urlBit : urlBits){
+        String[] queryStr_ = queryStr.split("&");
+        for (String urlBit : queryStr_){
             String[] query = urlBit.split("=");
             String queryParam = query[0];
             String queryValue = query[1];
@@ -24,7 +29,6 @@ public class Rq {
     }
 
     public String getPath(){
-        String path = url.split("\\?",2)[0];
-        return path;
+        return this.path;
     }
 }
