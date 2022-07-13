@@ -9,7 +9,7 @@ public class Rq {
         this.url = url;
         String[] urlBits = url.split("\\?", 2);
         this.path = urlBits[0];
-        if (urlBits[1].length() > 2){
+        if (urlBits.length == 2){
             this.queryStr = urlBits[1];
         }
     }

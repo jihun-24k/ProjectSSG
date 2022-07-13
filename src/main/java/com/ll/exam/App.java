@@ -10,7 +10,7 @@ public class App {
     App(){
         this.posts = new ArrayList<>();
         this.sc = new Scanner(System.in);
-        this.postId = 1;
+        this.postId = 0;
     }
     public void run() {
         System.out.println("-- 명언 SSG --");
@@ -44,10 +44,11 @@ public class App {
         System.out.printf("작가 : ");
         String author = sc.nextLine();
 
+        postId++;
         Post newPost = new Post(postId, contents, author);
         posts.add(newPost);
+
         System.out.println(postId+"번 글이 등록되었습니다.");
-        postId++;
     }
     public void list(){
         System.out.println("-- 명언 목록 --");
@@ -60,23 +61,27 @@ public class App {
 
     public void delete(Rq rq){
         int delId = rq.getIntParam("id",0);
-        Post postNull = null;
+
         if (delId == 0){
             System.out.println("id 값을 입력해주세요.");
             return ;
         }
-        for (int i = posts.size() - 1; i >= 0; i--){
-            Post delPost = posts.get(i);
-            if (delPost.idx == delId){
-                System.out.println(delPost.idx+"번 명언이 삭제되었습니다.");
-                posts.remove(i);
-                postNull = delPost;
-                break ;
-            }
-        }
-        if (postNull == null){
+        Post delPost = findById(delId);
+        if (delPost == null){
             System.out.println(delId+"번 명언은 없습니다.");
+        }
+        else{
+            posts.remove(delPost);
+            System.out.println(delId+"번 명언이 삭제되었습니다.");
         }
     }
 
+    public Post findById(int id){
+        for (Post post: posts){
+            if (post.idx == id){
+                return post;
+            }
+        }
+        return null;
+    }
 }
