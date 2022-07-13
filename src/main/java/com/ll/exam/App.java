@@ -31,6 +31,9 @@ public class App {
                 case "목록":
                     list();
                     break;
+                case "수정":
+                    change(rq);
+                    break;
                 case "삭제":
                     delete(rq);
                     break;
@@ -83,5 +86,31 @@ public class App {
             }
         }
         return null;
+    }
+
+    public void change(Rq rq) {
+        int chaId = rq.getIntParam("id",0);
+
+        if (chaId == 0){
+            System.out.println("id 값을 입력해주세요.");
+            return ;
+        }
+        Post changePost = findById(chaId);
+        if (changePost == null){
+            System.out.println(chaId+"번 명언은 없습니다.");
+        }
+        else{
+            System.out.printf("변경할 명언 : %s\n", changePost.contents);
+            System.out.print("새로운 명언 : ");
+            String contents = sc.nextLine().trim();
+            changePost.contents = contents;
+
+            System.out.printf("변경할 작가 : %s\n", changePost.author);
+            System.out.print("새로운 작가 : ");
+            String author = sc.nextLine().trim();
+            changePost.author = author;
+
+            System.out.println("수정이 완료되었습니다.");
+        }
     }
 }
