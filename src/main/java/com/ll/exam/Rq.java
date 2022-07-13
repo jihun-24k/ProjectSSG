@@ -1,29 +1,30 @@
 package com.ll.exam;
 
+import java.util.HashMap;
+
 public class Rq {
-    String url;
-    String path;
-    String queryStr;
+    private String url;
+    private String path;
+    private HashMap<String, String> queryParams;
 
     Rq(String url){
         this.url = url;
         String[] urlBits = url.split("\\?", 2);
         this.path = urlBits[0];
+        this.queryParams = new HashMap<>();
+
         if (urlBits.length == 2){
-            this.queryStr = urlBits[1];
+            urlBits = urlBits[1].split("&");
+            for (String urlBit: urlBits){
+                String[] queryKeyValue = urlBit.split("=");
+                queryParams.put(queryKeyValue[0], queryKeyValue[1]);
+            }
         }
     }
 
-    public int getIntParam(String _queryParam, int DefaultValue){
-        String[] queryStr_ = queryStr.split("&");
-        for (String urlBit : queryStr_){
-            String[] query = urlBit.split("=");
-            String queryParam = query[0];
-            String queryValue = query[1];
-
-            if(queryParam.equals(_queryParam)){
-                return Integer.parseInt(queryValue);
-            }
+    public int getIntParam(String queryParam, int DefaultValue){
+        if(queryParams.containsKey(queryParam)) {
+            return Integer.parseInt(queryParams.get(queryParam));
         }
         return DefaultValue;
     }
