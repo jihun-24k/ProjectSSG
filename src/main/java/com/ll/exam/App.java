@@ -8,7 +8,7 @@ public class App {
     PostController postController;
     App(){
         this.sc = new Scanner(System.in);
-        this.postController = new PostController();
+        this.postController = new PostController(sc);
     }
     public void run() {
         System.out.println("-- 명언 SSG --");
