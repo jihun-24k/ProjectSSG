@@ -17,10 +17,7 @@ public class PostController {
         System.out.printf("작가 : ");
         String author = sc.nextLine();
 
-        postRepository.postId++;
-        Post newPost = new Post(postRepository.postId, contents, author);
-        postRepository.posts.add(newPost);
-
+        postRepository.write(contents, author);
         System.out.println(postRepository.postId+"번 글이 등록되었습니다.");
     }
     public void list(){
@@ -44,7 +41,7 @@ public class PostController {
             System.out.println(delId+"번 명언은 없습니다.");
         }
         else{
-            postRepository.posts.remove(delPost);
+            postRepository.delete(delId);
             System.out.println(delId+"번 명언이 삭제되었습니다.");
         }
     }
