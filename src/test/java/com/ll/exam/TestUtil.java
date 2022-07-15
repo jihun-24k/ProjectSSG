@@ -15,4 +15,17 @@ public class TestUtil {
 
         assertEquals("내용\n내용",rs);
     }
+
+    @Test
+    void InstanceToJsonTest(){
+        Util.mkdir("test_data");
+        Post post = new Post(1, "난 아직 배고프다","히딩크");
+        String strInstance = post.toJson();
+
+        Util.saveToFile("test_data/1.json",strInstance);
+
+        String rs = Util.readFromFile("test_data/1.json");
+
+        assertEquals(rs, strInstance);
+    }
 }

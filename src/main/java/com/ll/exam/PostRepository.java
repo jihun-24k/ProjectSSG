@@ -19,14 +19,15 @@ public class PostRepository {
         return newPost;
     }
 
-    public void delete(int delId){
+    public Post delete(int delId){
         Post delPost = findById(delId);
-        posts.remove(delPost);
+        posts.remove(delId);
+        return delPost;
     }
 
     public Post findById(int id){
         for (Post post: posts){
-            if (post.idx == id){
+            if (post.id == id){
                 return post;
             }
         }

@@ -25,7 +25,7 @@ public class PostController {
         System.out.println("id/  작가/  명언");
         for (int i = postRepository.posts.size() - 1; i >= 0; i--){
             Post post1 = postRepository.posts.get(i);
-            System.out.printf("%d/%3s/%3s\n", post1.idx, post1.author, post1.contents);
+            System.out.printf("%d/%3s/%3s\n", post1.id, post1.author, post1.contents);
         }
     }
 
