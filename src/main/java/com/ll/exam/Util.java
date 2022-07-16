@@ -15,6 +15,9 @@ import java.util.stream.Stream;
 
 public class Util {
     public static void saveToFile(String path, String body) {
+
+        new File(path).delete();
+
         try(RandomAccessFile stream = new RandomAccessFile(path, "rw");
             FileChannel channel = stream.getChannel();) {
             byte[] strBytes = body.getBytes();
@@ -83,6 +86,23 @@ public class Util {
         } catch (IOException e) {
 
         }
+    }
+    public static void saveNumberToFile(String path, int number) {
+        saveToFile(path, number + "");
+    }
+
+    public static int readNumberFromFile(String path, int defaultValue) {
+        String rs = readFromFile(path);
+
+        if ( rs == null ) {
+            return defaultValue;
+        }
+
+        if ( rs.isEmpty() ) {
+            return defaultValue;
+        }
+
+        return Integer.parseInt(rs);
     }
 }
 class Pair {

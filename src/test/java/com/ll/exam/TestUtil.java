@@ -68,4 +68,13 @@ public class TestUtil {
 
         assertEquals(post, loadedPost);
     }
+
+    @Test
+    void saveFileToNumTest() {
+        Util.saveNumberToFile("test_data/last_id.txt", 100);
+
+        int rs = Util.readNumberFromFile("test_data/last_id.txt", 0);
+
+        assertEquals(100, rs);
+    }
 }
