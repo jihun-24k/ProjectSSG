@@ -46,4 +46,23 @@ public class TestUtil {
         assertEquals(rs.get("contents"), "난 아직 배고프다");
         assertEquals(rs.get("author"), "히딩크");
     }
+
+    @Test
+    void MapToInstance(){
+        Util.mkdir("test_data");
+        Post post = new Post(1, "난 아직 배고프다","히딩크");
+        String strInstance = post.toJson();
+
+        Util.saveToFile("test_data/1.json",strInstance);
+
+        String json = Util.readFromFile("test_data/1.json");
+        Map<String, Object> map = Util.jsonToMap(json);
+        Post loadedPost = new Post(map);
+
+        assertEquals(map.get("id"), 1);
+        assertEquals(map.get("contents"), "난 아직 배고프다");
+        assertEquals(map.get("author"), "히딩크");
+
+        assertEquals(post, loadedPost);
+    }
 }
