@@ -1,5 +1,6 @@
 package com.ll.exam;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -8,9 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestUtil {
 
+    @BeforeEach
+    void beforeEach(){
+        Util.deleteDir("test_data");
+        Util.mkdir("test_data");
+    }
+
     @Test
     void writeFileTest() {
-        Util.mkdir("test_data");
         Util.saveToFile("test_data/1.json", "내용\n내용");
 
         String rs = Util.readFromFile("test_data/1.json");
@@ -20,7 +26,6 @@ public class TestUtil {
 
     @Test
     void InstanceToJsonTest(){
-        Util.mkdir("test_data");
         Post post = new Post(1, "난 아직 배고프다","히딩크");
         String strInstance = post.toJson();
 
@@ -33,7 +38,6 @@ public class TestUtil {
 
     @Test
     void JsonToMapTest(){
-        Util.mkdir("test_data");
         Post post = new Post(1, "난 아직 배고프다","히딩크");
         String strInstance = post.toJson();
 
@@ -49,7 +53,6 @@ public class TestUtil {
 
     @Test
     void MapToInstance(){
-        Util.mkdir("test_data");
         Post post = new Post(1, "난 아직 배고프다","히딩크");
         String strInstance = post.toJson();
 
